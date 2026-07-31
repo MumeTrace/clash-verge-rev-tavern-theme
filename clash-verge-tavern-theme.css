@@ -1,0 +1,829 @@
+/*
+ * Clash Verge Rev v2.5.2 - Warm Tavern Theme
+ * Generated file: edit parts/*.css and run npm run build.
+ * Selectors use stable application classes, MUI component classes, data attributes, and DOM structure.
+ */
+
+/* ===== 00-variables.css ===== */
+/*
+ * 酒馆主题：公共变量
+ * 公开版本不包含作者图片或图片地址。
+ * 私人使用请通过 theme.private.json 和 npm run build:private 注入图片地址。
+ */
+html[data-css-injection-root="true"] {
+  --tavern-main-image: none;
+  --tavern-sidebar-image: none;
+  --tavern-chibi-image: none;
+
+  --tavern-sidebar-width: 218px;
+  /* 高窗口时适度放大人物框，压缩“设置”下方的无效空白；普通窗口仍不低于 178px。 */
+  --tavern-traffic-height: clamp(178px, 25vh, 220px);
+
+  --tavern-ink: #160f0d;
+  --tavern-deep: #241612;
+  --tavern-wine: #6f2f28;
+  --tavern-wine-bright: #a64d38;
+  --tavern-amber: #e39a45;
+  --tavern-honey: #f2bd6b;
+  --tavern-gold: #ffd38a;
+  --tavern-text: #fff2dc;
+  --tavern-text-muted: #ddc7aa;
+
+  --tavern-line: rgba(242, 189, 107, 0.48);
+  --tavern-line-strong: rgba(255, 211, 138, 0.9);
+  --tavern-glass: rgba(31, 18, 15, 0.18);
+  --tavern-glass-hover: rgba(87, 43, 30, 0.3);
+  --tavern-shadow: 0 5px 16px rgba(9, 5, 4, 0.28);
+  --tavern-text-shadow:
+    -1px 0 1px rgba(8, 5, 4, 0.94),
+    1px 0 1px rgba(8, 5, 4, 0.94),
+    0 -1px 1px rgba(8, 5, 4, 0.94),
+    0 1px 2px rgba(8, 5, 4, 1),
+    0 0 6px rgba(0, 0, 0, 0.82);
+
+  color-scheme: dark;
+}
+
+/* ===== 01-background.css ===== */
+/* 右侧主背景：不加蒙版、不调亮度、不模糊原图。 */
+html[data-css-injection-root="true"],
+html[data-css-injection-root="true"] body,
+html[data-css-injection-root="true"] #root {
+  background: var(--tavern-ink) !important;
+}
+
+html[data-css-injection-root="true"] .layout.MuiPaper-root {
+  background: transparent !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right {
+  isolation: isolate;
+  background-color: var(--tavern-deep) !important;
+  background-image: var(--tavern-main-image) !important;
+  background-size: cover !important;
+  background-position: 50% 50% !important;
+  background-repeat: no-repeat !important;
+  /* 按右侧容器自身定位；fixed 会改成按整个窗口定位，缩放时人物会横向跨位。 */
+  background-attachment: scroll !important;
+  background-origin: border-box !important;
+}
+
+/* 右侧交界处的暖色过渡：只叠颜色，不模糊两张原图。 */
+html[data-css-injection-root="true"] .layout-content__right::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  width: 64px;
+  background: linear-gradient(
+    90deg,
+    rgba(67, 39, 31, 0.84) 0%,
+    rgba(67, 39, 31, 0.34) 48%,
+    rgba(67, 39, 31, 0) 100%
+  );
+  pointer-events: none;
+}
+
+html[data-css-injection-root="true"] .layout-content__right > .the-bar {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-css-injection-root="true"] .layout-content__right > .the-content {
+  z-index: 1;
+}
+
+/* 只清理右侧页面级“白墙”，不暴力清空所有 .MuiBox-root。 */
+html[data-css-injection-root="true"] .layout-content__right .the-content,
+html[data-css-injection-root="true"] .layout-content__right .base-page,
+html[data-css-injection-root="true"] .layout-content__right .base-container,
+html[data-css-injection-root="true"] .layout-content__right .base-container > section,
+html[data-css-injection-root="true"] .layout-content__right .base-content {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right {
+  color: var(--tavern-text) !important;
+}
+
+/*
+ * 当前应用即使使用浅色 MUI 配色，右侧背景仍然是深色图片。
+ * 因此普通文字必须明确改成暖白，不能只依赖继承或文字阴影。
+ */
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiTypography-root,
+  .MuiListItemText-primary,
+  .MuiFormLabel-root,
+  .MuiInputLabel-root,
+  .MuiInputBase-input,
+  .MuiSelect-select,
+  .MuiTableCell-root
+) {
+  color: var(--tavern-text) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiListItemText-secondary,
+  .MuiTypography-colorTextSecondary,
+  .MuiFormHelperText-root
+) {
+  color: var(--tavern-text-muted) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiInputBase-input.Mui-disabled,
+html[data-css-injection-root="true"] .layout-content__right .MuiSelect-select.Mui-disabled {
+  color: var(--tavern-text-muted) !important;
+  -webkit-text-fill-color: var(--tavern-text-muted) !important;
+  opacity: 0.82 !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiTypography-root,
+  .MuiListItemText-primary,
+  .MuiListItemText-secondary,
+  .MuiButton-root,
+  .MuiInputBase-input,
+  .MuiFormLabel-root,
+  .MuiTableCell-root
+) {
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiListItemText-primary {
+  color: var(--tavern-text) !important;
+}
+
+html[data-css-injection-root="true"] * {
+  scrollbar-color: rgba(227, 154, 69, 0.7) rgba(22, 15, 13, 0.2);
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar-thumb {
+  background: rgba(227, 154, 69, 0.68);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar-track {
+  background: rgba(22, 15, 13, 0.16);
+}
+
+/* ===== 02-sidebar.css ===== */
+/* 展开状态官方宽度是 200px；这里按需求增加 18px。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .layout-content__left {
+  flex: 0 0 var(--tavern-sidebar-width) !important;
+  width: var(--tavern-sidebar-width) !important;
+  min-width: var(--tavern-sidebar-width) !important;
+  max-width: var(--tavern-sidebar-width) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__left {
+  position: relative !important;
+  isolation: isolate;
+  background-color: var(--tavern-deep) !important;
+  border-right: 1px solid rgba(227, 154, 69, 0.44) !important;
+  box-shadow: 6px 0 22px rgba(10, 6, 5, 0.3);
+}
+
+/* 第二张竖图只覆盖 Logo 和菜单区域；底部留给 Q 版卡片。 */
+html[data-css-injection-root="true"] .layout-content__left::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 calc(var(--tavern-traffic-height) + 20px) 0;
+  z-index: -1;
+  background-color: #29323a;
+  background-image: var(--tavern-sidebar-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* 蓝灰侧栏图向暖色主图过渡，避免两张图片在分界线处硬切。 */
+html[data-css-injection-root="true"] .layout-content__left::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 calc(var(--tavern-traffic-height) + 20px) 0;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(43, 50, 56, 0) 68%,
+    rgba(59, 37, 31, 0.36) 84%,
+    rgba(67, 39, 31, 0.78) 100%
+  );
+  pointer-events: none;
+}
+
+html[data-css-injection-root="true"] .layout--nav-collapsed .layout-content__left::before {
+  inset: 0;
+}
+
+html[data-css-injection-root="true"] .layout--nav-collapsed .layout-content__left::after {
+  inset: 0;
+}
+
+html[data-css-injection-root="true"] .layout-content__left :where(.the-logo, .the-menu, .the-traffic) {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-css-injection-root="true"] .layout-content__left .the-logo svg {
+  opacity: 0.96;
+  filter:
+    sepia(0.52)
+    saturate(1.45)
+    hue-rotate(342deg)
+    brightness(1.12)
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.86))
+    drop-shadow(0 0 7px rgba(227, 154, 69, 0.42));
+}
+
+html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root {
+  border: 1px solid rgba(242, 189, 107, 0.32) !important;
+  border-radius: 12px !important;
+  background: rgba(27, 17, 15, 0.2) !important;
+  -webkit-backdrop-filter: blur(5px) saturate(112%);
+  backdrop-filter: blur(5px) saturate(112%);
+  box-shadow: 0 3px 10px rgba(9, 5, 4, 0.18);
+  transition:
+    transform 180ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+/* 缩短每一项的纵向占用，避免底部“设置”只能通过滚动才能看到。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-menu .MuiListItem-root {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-menu .MuiListItemButton-root {
+  min-height: 46px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root:hover {
+  transform: translateY(-2px);
+  background: rgba(91, 45, 32, 0.32) !important;
+  border-color: rgba(255, 211, 138, 0.72) !important;
+  box-shadow:
+    0 5px 14px rgba(9, 5, 4, 0.3),
+    0 0 10px rgba(227, 154, 69, 0.2);
+}
+
+html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root.Mui-selected,
+html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root.Mui-selected:hover {
+  background: rgba(111, 47, 40, 0.38) !important;
+  border-color: var(--tavern-line-strong) !important;
+  box-shadow:
+    inset 0 0 10px rgba(242, 189, 107, 0.12),
+    0 0 9px rgba(227, 154, 69, 0.5),
+    0 4px 13px rgba(9, 5, 4, 0.32);
+  animation: tavern-nav-glow 2.8s ease-in-out infinite;
+}
+
+html[data-css-injection-root="true"] .the-menu :where(
+  .MuiListItemText-primary,
+  .MuiListItemIcon-root,
+  .MuiSvgIcon-root
+) {
+  color: var(--tavern-text) !important;
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .the-menu .Mui-selected :where(
+  .MuiListItemText-primary,
+  .MuiListItemIcon-root,
+  .MuiSvgIcon-root
+) {
+  color: var(--tavern-gold) !important;
+}
+
+@keyframes tavern-nav-glow {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 8px rgba(242, 189, 107, 0.1),
+      0 0 6px rgba(227, 154, 69, 0.35),
+      0 4px 13px rgba(9, 5, 4, 0.3);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 12px rgba(242, 189, 107, 0.16),
+      0 0 13px rgba(255, 190, 92, 0.62),
+      0 4px 15px rgba(9, 5, 4, 0.36);
+  }
+}
+
+/* ===== 03-traffic-chibi.css ===== */
+/*
+ * Q 版人物作为流量区背景；原图表、网速、内存数字和单位继续显示在前景。
+ * 人物只通过伪元素显示，不会干扰图表和菜单点击。
+ */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic {
+  position: relative !important;
+  flex: 0 0 var(--tavern-traffic-height) !important;
+  min-height: var(--tavern-traffic-height) !important;
+  margin: 8px 10px 2px !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 211, 138, 0.72);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(227, 154, 69, 0.19), transparent 52%),
+    linear-gradient(180deg, rgba(50, 28, 22, 0.26), rgba(18, 11, 10, 0.42));
+  -webkit-backdrop-filter: blur(4px) saturate(112%);
+  backdrop-filter: blur(4px) saturate(112%);
+  box-shadow:
+    inset 0 0 16px rgba(242, 189, 107, 0.08),
+    0 0 10px rgba(227, 154, 69, 0.34),
+    0 6px 16px rgba(9, 5, 4, 0.32);
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic > * {
+  display: block !important;
+  position: relative !important;
+  z-index: 2;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto !important;
+  padding: 8px 14px 10px !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic::before {
+  content: "";
+  position: absolute;
+  inset: 8px 5px 4px;
+  z-index: 1;
+  background-image: var(--tavern-chibi-image);
+  background-size: auto 88%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  opacity: 0.42;
+  filter:
+    drop-shadow(0 4px 5px rgba(0, 0, 0, 0.58))
+    drop-shadow(0 0 5px rgba(227, 154, 69, 0.22));
+  pointer-events: none;
+  animation: tavern-chibi-bob 3.6s ease-in-out infinite;
+}
+
+/* 三行数据各有一层普通半透明底色；不是毛玻璃。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title] {
+  padding: 2px 5px;
+  border: 1px solid rgba(242, 189, 107, 0.2);
+  border-radius: 6px;
+  background: rgba(18, 11, 10, 0.48) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* 上传、下载、内存数值继续区分颜色；单位统一为高对比米白。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(1) .MuiTypography-root:first-of-type {
+  color: #ff9b76 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(2) .MuiTypography-root:first-of-type {
+  color: #4daaff !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(3) .MuiTypography-root:first-of-type {
+  color: #f5d5a4 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title] .MuiTypography-root:last-child {
+  color: #f4dfbd !important;
+  font-weight: 600 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic :where(
+  .MuiTypography-root,
+  .MuiSvgIcon-root
+) {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 5px rgba(0, 0, 0, 0.9) !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: 2;
+  border: 1px solid rgba(242, 189, 107, 0.2);
+  border-radius: 11px;
+  box-shadow: inset 0 0 12px rgba(255, 211, 138, 0.08);
+  pointer-events: none;
+}
+
+@keyframes tavern-chibi-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ===== 04-titlebar-controls.css ===== */
+/* 页面顶部标题区：轻玻璃，不对背景图本身做模糊处理。 */
+html[data-css-injection-root="true"] .base-page > header[data-tauri-drag-region="true"] {
+  background: linear-gradient(90deg, rgba(30, 18, 15, 0.3), rgba(72, 39, 28, 0.18)) !important;
+  border-bottom: 1px solid rgba(242, 189, 107, 0.42) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  backdrop-filter: blur(4px) saturate(110%);
+  box-shadow: 0 4px 12px rgba(9, 5, 4, 0.18);
+}
+
+html[data-css-injection-root="true"] .base-page > header[data-tauri-drag-region="true"] > .MuiTypography-root {
+  color: var(--tavern-text) !important;
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] :where(.the-bar, .the_titlebar) {
+  background: rgba(28, 17, 14, 0.18) !important;
+  border-color: rgba(242, 189, 107, 0.34) !important;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+html[data-css-injection-root="true"] :where(
+  .layout-content__right,
+  .the-bar,
+  .the_titlebar
+) .MuiIconButton-root {
+  color: var(--tavern-text) !important;
+  background: rgba(31, 18, 15, 0.2) !important;
+  border: 1px solid rgba(242, 189, 107, 0.28) !important;
+  transition:
+    transform 180ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease !important;
+}
+
+html[data-css-injection-root="true"] :where(
+  .layout-content__right,
+  .the-bar,
+  .the_titlebar
+) .MuiIconButton-root:hover {
+  transform: translateY(-1px);
+  color: var(--tavern-gold) !important;
+  background: rgba(111, 47, 40, 0.34) !important;
+  border-color: rgba(255, 211, 138, 0.7) !important;
+  box-shadow: 0 0 9px rgba(227, 154, 69, 0.3);
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiButton-outlined {
+  color: var(--tavern-text) !important;
+  border-color: rgba(242, 189, 107, 0.6) !important;
+  background: rgba(31, 18, 15, 0.18) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiButton-contained {
+  color: #fff8eb !important;
+  background: linear-gradient(135deg, var(--tavern-wine), var(--tavern-wine-bright)) !important;
+  border: 1px solid rgba(255, 211, 138, 0.58) !important;
+  box-shadow: 0 3px 10px rgba(9, 5, 4, 0.26);
+}
+
+/* ===== 05-node-cards.css ===== */
+/* 完整节点行和多列迷你节点；[data-index] 来自官方虚拟列表。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root:has(> .MuiBox-root .the-delay) {
+  position: relative;
+  background: rgba(24, 15, 13, 0.1) !important;
+  border: 1px solid var(--tavern-line) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--tavern-shadow) !important;
+  -webkit-backdrop-filter: blur(2px) saturate(108%);
+  backdrop-filter: blur(2px) saturate(108%);
+  transition:
+    transform 180ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root:hover,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root:hover,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root:has(> .MuiBox-root .the-delay):hover {
+  transform: translateY(-2px);
+  background: var(--tavern-glass-hover) !important;
+  border-color: rgba(255, 211, 138, 0.76) !important;
+  box-shadow:
+    0 7px 16px rgba(9, 5, 4, 0.36),
+    0 0 9px rgba(227, 154, 69, 0.24) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root.Mui-selected,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root.Mui-selected,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root.Mui-selected:has(> .MuiBox-root .the-delay) {
+  width: 100% !important;
+  margin-left: 0 !important;
+  background: rgba(111, 47, 40, 0.5) !important;
+  border: 2px solid #ffd38a !important;
+  outline: 1px solid rgba(166, 77, 56, 0.9) !important;
+  outline-offset: 1px !important;
+  box-shadow:
+    inset 6px 0 0 #f2bd6b,
+    inset 0 0 14px rgba(255, 211, 138, 0.18),
+    0 0 15px rgba(255, 190, 92, 0.72),
+    0 7px 17px rgba(9, 5, 4, 0.42) !important;
+  animation: tavern-node-selected 2.5s ease-in-out infinite;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root.Mui-selected :where(
+  .MuiListItemText-primary,
+  .MuiTypography-root:first-child
+) {
+  color: #fff4df !important;
+  font-weight: 800 !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 6px rgba(255, 190, 92, 0.5) !important;
+}
+
+@keyframes tavern-node-selected {
+  0%, 100% {
+    border-color: #f2bd6b;
+    filter: brightness(1);
+  }
+  50% {
+    border-color: #fff1c7;
+    filter: brightness(1.1);
+  }
+}
+
+/* 代理组标题的白色背景：普通半透明，不使用毛玻璃。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] > div > .MuiListItemButton-root {
+  color: var(--tavern-text) !important;
+  background: rgba(49, 28, 22, 0.5) !important;
+  border: 1px solid rgba(242, 189, 107, 0.5) !important;
+  border-radius: 10px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 4px 12px rgba(9, 5, 4, 0.25) !important;
+}
+
+/*
+ * 节点名在不同布局里可能是 Typography，也可能是 ListItemText 内的普通 Box。
+ * 在节点按钮范围内统一提供继承色，避免浅色主题留下黑字；延迟组件仍保留自身状态色。
+ */
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root {
+  color: #fff7e8 !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root :where(
+  .MuiListItemText-primary,
+  .MuiListItemText-secondary,
+  .MuiTypography-root
+) {
+  color: #fff7e8 !important;
+  font-weight: 650 !important;
+  -webkit-text-stroke: 0.2px rgba(10, 6, 5, 0.92);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index]
+  .MuiListItemText-secondary > .MuiBox-root {
+  color: #fff7e8 !important;
+  font-weight: 650 !important;
+  -webkit-text-stroke: 0.2px rgba(10, 6, 5, 0.92);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+/* VLESS / UDP / XUDP / Provider 等标签：统一尺寸、方形小圆角和暖色。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemText-secondary > span,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root span.MuiBox-root {
+  display: inline-block !important;
+  margin-right: 4px !important;
+  padding: 1px 4px !important;
+  color: #f5d5a4 !important;
+  background: rgba(92, 42, 28, 0.26) !important;
+  border: 1px solid rgba(242, 189, 107, 0.54) !important;
+  border-radius: 4px !important;
+  line-height: 1.4 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.92) !important;
+}
+
+/* 延迟颜色仍由 Clash 自己计算；这里只加可读性底框。 */
+html[data-css-injection-root="true"] .layout-content__right .the-delay {
+  background: rgba(16, 10, 9, 0.25) !important;
+  border: 1px solid currentColor !important;
+  border-radius: 5px !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.96),
+    0 0 4px rgba(0, 0, 0, 0.68) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .the-check {
+  color: var(--tavern-honey) !important;
+  background: rgba(16, 10, 9, 0.28) !important;
+  border: 1px solid rgba(242, 189, 107, 0.52) !important;
+  border-radius: 5px !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(.the-pin, .the-unpin, .the-icon) {
+  filter: drop-shadow(0 0 4px rgba(227, 154, 69, 0.66));
+}
+
+/* ===== 06-panels-overlays.css ===== */
+/* 普通卡片：保持透明度，但不给所有 MuiBox 统一清底。 */
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiCard-root,
+  .MuiAccordion-root
+) {
+  color: var(--tavern-text) !important;
+  background: rgba(31, 18, 15, 0.2) !important;
+  border: 1px solid rgba(242, 189, 107, 0.4) !important;
+  border-radius: 12px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: var(--tavern-shadow) !important;
+}
+
+/*
+ * 首页 EnhancedCard 没有自定义类，只能用官方固定 Grid 结构定位：
+ * .base-content > Grid容器 > Grid项目 > 卡片Box。
+ * 这里使用普通半透明色，明确关闭毛玻璃。
+ */
+html[data-css-injection-root="true"] .layout-content__right .base-content
+  > .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root {
+  color: var(--tavern-text) !important;
+  background: rgba(44, 25, 20, 0.5) !important;
+  border: 1px solid rgba(242, 189, 107, 0.5) !important;
+  border-radius: 12px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 5px 15px rgba(9, 5, 4, 0.3) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .base-content
+  > .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root :where(
+    .MuiTypography-root,
+    .MuiListItemText-primary,
+    .MuiListItemText-secondary,
+    .MuiFormLabel-root
+  ) {
+  color: var(--tavern-text) !important;
+  font-weight: 600 !important;
+  -webkit-text-stroke: 0.18px rgba(10, 6, 5, 0.9);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+/* 首页“当前节点”的 UDP / XUDP 等 Chip 标签不能沿用浅色主题的黑字。 */
+html[data-css-injection-root="true"] .layout-content__right .base-content
+  > .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root .MuiChip-label {
+  color: #fff7e8 !important;
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.18px rgba(10, 6, 5, 0.92);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .base-content
+  > .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root .MuiChip-outlined {
+  background: rgba(31, 18, 15, 0.36) !important;
+  border-color: rgba(255, 211, 138, 0.68) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiOutlinedInput-root,
+  .MuiInputBase-root
+) {
+  color: var(--tavern-text) !important;
+  background: rgba(24, 15, 13, 0.2) !important;
+  border-radius: 9px !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(242, 189, 107, 0.44) !important;
+}
+
+/* 订阅页面 ProfileBox：改成与节点卡片一致的半透明暖色边框。 */
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding [aria-selected].MuiBox-root,
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding
+  .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root:has(> .MuiBox-root > h2) {
+  width: 100% !important;
+  margin-left: 0 !important;
+  color: var(--tavern-text-muted) !important;
+  background: rgba(35, 21, 17, 0.34) !important;
+  border: 1px solid rgba(242, 189, 107, 0.52) !important;
+  border-radius: 10px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 5px 14px rgba(9, 5, 4, 0.3) !important;
+  transition:
+    transform 180ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding [aria-selected].MuiBox-root:hover,
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding
+  .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root:has(> .MuiBox-root > h2):hover {
+  transform: translateY(-2px);
+  background: rgba(91, 45, 32, 0.42) !important;
+  border-color: rgba(255, 211, 138, 0.78) !important;
+  box-shadow:
+    0 7px 17px rgba(9, 5, 4, 0.38),
+    0 0 9px rgba(227, 154, 69, 0.24) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding [aria-selected="true"].MuiBox-root {
+  background: rgba(111, 47, 40, 0.5) !important;
+  border: 2px solid #ffd38a !important;
+  box-shadow:
+    inset 6px 0 0 #f2bd6b,
+    0 0 13px rgba(255, 190, 92, 0.62),
+    0 7px 17px rgba(9, 5, 4, 0.4) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding [aria-selected].MuiBox-root :where(
+  h2,
+  .MuiTypography-root
+),
+html[data-css-injection-root="true"] .layout-content__right .base-container.no-padding
+  .MuiGrid-root
+  > .MuiGrid-root
+  > .MuiBox-root:has(> .MuiBox-root > h2) :where(h2, .MuiTypography-root) {
+  color: var(--tavern-text) !important;
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+/* 弹窗、菜单和提示必须有深色底，不能跟随页面变成完全透明。 */
+html[data-css-injection-root="true"] :where(
+  .MuiDialog-paper,
+  .MuiPopover-paper,
+  .MuiMenu-paper
+) {
+  color: var(--tavern-text) !important;
+  background: rgba(28, 17, 14, 0.9) !important;
+  border: 1px solid rgba(242, 189, 107, 0.52) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(112%);
+  backdrop-filter: blur(10px) saturate(112%);
+  box-shadow:
+    0 12px 32px rgba(7, 4, 3, 0.52),
+    0 0 10px rgba(227, 154, 69, 0.18) !important;
+}
+
+/* Select 下拉菜单通过 Portal 挂到页面根部，因此不能只写在右侧容器下面。 */
+html[data-css-injection-root="true"] :where(.MuiPopover-paper, .MuiMenu-paper)
+  :where(.MuiMenuItem-root, .MuiTypography-root, .MuiChip-label) {
+  color: #fff7e8 !important;
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .MuiTooltip-tooltip {
+  color: var(--tavern-text) !important;
+  background: rgba(28, 17, 14, 0.94) !important;
+  border: 1px solid rgba(242, 189, 107, 0.44) !important;
+  box-shadow: 0 5px 14px rgba(7, 4, 3, 0.4);
+}
+
+html[data-css-injection-root="true"] .MuiSnackbarContent-root {
+  color: var(--tavern-text) !important;
+  background: rgba(48, 27, 21, 0.94) !important;
+  border: 1px solid rgba(242, 189, 107, 0.5) !important;
+}
+
+@media (max-height: 720px) {
+  html[data-css-injection-root="true"] {
+    --tavern-traffic-height: 150px;
+  }
+}
+
+@media (max-width: 760px) {
+  html[data-css-injection-root="true"] {
+    --tavern-sidebar-width: 215px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root,
+  html[data-css-injection-root="true"] .the-traffic::before,
+  html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root {
+    animation: none !important;
+    transition-duration: 1ms !important;
+  }
+
+  html[data-css-injection-root="true"] .the-menu .MuiListItemButton-root:hover,
+  html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root:hover {
+    transform: none !important;
+  }
+}

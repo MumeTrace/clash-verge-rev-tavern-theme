@@ -1,0 +1,38 @@
+/*
+ * 酒馆主题：公共变量
+ * 公开版本不包含作者图片或图片地址。
+ * 私人使用请通过 theme.private.json 和 npm run build:private 注入图片地址。
+ */
+html[data-css-injection-root="true"] {
+  --tavern-main-image: none;
+  --tavern-sidebar-image: none;
+  --tavern-chibi-image: none;
+
+  --tavern-sidebar-width: 218px;
+  /* 高窗口时适度放大人物框，压缩“设置”下方的无效空白；普通窗口仍不低于 178px。 */
+  --tavern-traffic-height: clamp(178px, 25vh, 220px);
+
+  --tavern-ink: #160f0d;
+  --tavern-deep: #241612;
+  --tavern-wine: #6f2f28;
+  --tavern-wine-bright: #a64d38;
+  --tavern-amber: #e39a45;
+  --tavern-honey: #f2bd6b;
+  --tavern-gold: #ffd38a;
+  --tavern-text: #fff2dc;
+  --tavern-text-muted: #ddc7aa;
+
+  --tavern-line: rgba(242, 189, 107, 0.48);
+  --tavern-line-strong: rgba(255, 211, 138, 0.9);
+  --tavern-glass: rgba(31, 18, 15, 0.18);
+  --tavern-glass-hover: rgba(87, 43, 30, 0.3);
+  --tavern-shadow: 0 5px 16px rgba(9, 5, 4, 0.28);
+  --tavern-text-shadow:
+    -1px 0 1px rgba(8, 5, 4, 0.94),
+    1px 0 1px rgba(8, 5, 4, 0.94),
+    0 -1px 1px rgba(8, 5, 4, 0.94),
+    0 1px 2px rgba(8, 5, 4, 1),
+    0 0 6px rgba(0, 0, 0, 0.82);
+
+  color-scheme: dark;
+}

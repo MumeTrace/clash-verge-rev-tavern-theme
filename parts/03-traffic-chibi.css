@@ -1,0 +1,102 @@
+/*
+ * Q 版人物作为流量区背景；原图表、网速、内存数字和单位继续显示在前景。
+ * 人物只通过伪元素显示，不会干扰图表和菜单点击。
+ */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic {
+  position: relative !important;
+  flex: 0 0 var(--tavern-traffic-height) !important;
+  min-height: var(--tavern-traffic-height) !important;
+  margin: 8px 10px 2px !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 211, 138, 0.72);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(227, 154, 69, 0.19), transparent 52%),
+    linear-gradient(180deg, rgba(50, 28, 22, 0.26), rgba(18, 11, 10, 0.42));
+  -webkit-backdrop-filter: blur(4px) saturate(112%);
+  backdrop-filter: blur(4px) saturate(112%);
+  box-shadow:
+    inset 0 0 16px rgba(242, 189, 107, 0.08),
+    0 0 10px rgba(227, 154, 69, 0.34),
+    0 6px 16px rgba(9, 5, 4, 0.32);
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic > * {
+  display: block !important;
+  position: relative !important;
+  z-index: 2;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto !important;
+  padding: 8px 14px 10px !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic::before {
+  content: "";
+  position: absolute;
+  inset: 8px 5px 4px;
+  z-index: 1;
+  background-image: var(--tavern-chibi-image);
+  background-size: auto 88%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  opacity: 0.42;
+  filter:
+    drop-shadow(0 4px 5px rgba(0, 0, 0, 0.58))
+    drop-shadow(0 0 5px rgba(227, 154, 69, 0.22));
+  pointer-events: none;
+  animation: tavern-chibi-bob 3.6s ease-in-out infinite;
+}
+
+/* 三行数据各有一层普通半透明底色；不是毛玻璃。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title] {
+  padding: 2px 5px;
+  border: 1px solid rgba(242, 189, 107, 0.2);
+  border-radius: 6px;
+  background: rgba(18, 11, 10, 0.48) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* 上传、下载、内存数值继续区分颜色；单位统一为高对比米白。 */
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(1) .MuiTypography-root:first-of-type {
+  color: #ff9b76 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(2) .MuiTypography-root:first-of-type {
+  color: #4daaff !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title]:nth-child(3) .MuiTypography-root:first-of-type {
+  color: #f5d5a4 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic [title] .MuiTypography-root:last-child {
+  color: #f4dfbd !important;
+  font-weight: 600 !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic :where(
+  .MuiTypography-root,
+  .MuiSvgIcon-root
+) {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 5px rgba(0, 0, 0, 0.9) !important;
+}
+
+html[data-css-injection-root="true"] .layout:not(.layout--nav-collapsed) .the-traffic::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  z-index: 2;
+  border: 1px solid rgba(242, 189, 107, 0.2);
+  border-radius: 11px;
+  box-shadow: inset 0 0 12px rgba(255, 211, 138, 0.08);
+  pointer-events: none;
+}
+
+@keyframes tavern-chibi-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}

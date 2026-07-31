@@ -1,0 +1,140 @@
+/* 完整节点行和多列迷你节点；[data-index] 来自官方虚拟列表。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root:has(> .MuiBox-root .the-delay) {
+  position: relative;
+  background: rgba(24, 15, 13, 0.1) !important;
+  border: 1px solid var(--tavern-line) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--tavern-shadow) !important;
+  -webkit-backdrop-filter: blur(2px) saturate(108%);
+  backdrop-filter: blur(2px) saturate(108%);
+  transition:
+    transform 180ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root:hover,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root:hover,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root:has(> .MuiBox-root .the-delay):hover {
+  transform: translateY(-2px);
+  background: var(--tavern-glass-hover) !important;
+  border-color: rgba(255, 211, 138, 0.76) !important;
+  box-shadow:
+    0 7px 16px rgba(9, 5, 4, 0.36),
+    0 0 9px rgba(227, 154, 69, 0.24) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] li.MuiListItem-root > .MuiListItemButton-root.Mui-selected,
+html[data-css-injection-root="true"] .layout-content__right [data-index] > .MuiBox-root > .MuiListItemButton-root.Mui-selected,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root.Mui-selected:has(> .MuiBox-root .the-delay) {
+  width: 100% !important;
+  margin-left: 0 !important;
+  background: rgba(111, 47, 40, 0.5) !important;
+  border: 2px solid #ffd38a !important;
+  outline: 1px solid rgba(166, 77, 56, 0.9) !important;
+  outline-offset: 1px !important;
+  box-shadow:
+    inset 6px 0 0 #f2bd6b,
+    inset 0 0 14px rgba(255, 211, 138, 0.18),
+    0 0 15px rgba(255, 190, 92, 0.72),
+    0 7px 17px rgba(9, 5, 4, 0.42) !important;
+  animation: tavern-node-selected 2.5s ease-in-out infinite;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root.Mui-selected :where(
+  .MuiListItemText-primary,
+  .MuiTypography-root:first-child
+) {
+  color: #fff4df !important;
+  font-weight: 800 !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 1),
+    0 0 6px rgba(255, 190, 92, 0.5) !important;
+}
+
+@keyframes tavern-node-selected {
+  0%, 100% {
+    border-color: #f2bd6b;
+    filter: brightness(1);
+  }
+  50% {
+    border-color: #fff1c7;
+    filter: brightness(1.1);
+  }
+}
+
+/* 代理组标题的白色背景：普通半透明，不使用毛玻璃。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] > div > .MuiListItemButton-root {
+  color: var(--tavern-text) !important;
+  background: rgba(49, 28, 22, 0.5) !important;
+  border: 1px solid rgba(242, 189, 107, 0.5) !important;
+  border-radius: 10px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 4px 12px rgba(9, 5, 4, 0.25) !important;
+}
+
+/*
+ * 节点名在不同布局里可能是 Typography，也可能是 ListItemText 内的普通 Box。
+ * 在节点按钮范围内统一提供继承色，避免浅色主题留下黑字；延迟组件仍保留自身状态色。
+ */
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root {
+  color: #fff7e8 !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root :where(
+  .MuiListItemText-primary,
+  .MuiListItemText-secondary,
+  .MuiTypography-root
+) {
+  color: #fff7e8 !important;
+  font-weight: 650 !important;
+  -webkit-text-stroke: 0.2px rgba(10, 6, 5, 0.92);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right [data-index]
+  .MuiListItemText-secondary > .MuiBox-root {
+  color: #fff7e8 !important;
+  font-weight: 650 !important;
+  -webkit-text-stroke: 0.2px rgba(10, 6, 5, 0.92);
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+/* VLESS / UDP / XUDP / Provider 等标签：统一尺寸、方形小圆角和暖色。 */
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemText-secondary > span,
+html[data-css-injection-root="true"] .layout-content__right [data-index] .MuiListItemButton-root span.MuiBox-root {
+  display: inline-block !important;
+  margin-right: 4px !important;
+  padding: 1px 4px !important;
+  color: #f5d5a4 !important;
+  background: rgba(92, 42, 28, 0.26) !important;
+  border: 1px solid rgba(242, 189, 107, 0.54) !important;
+  border-radius: 4px !important;
+  line-height: 1.4 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.92) !important;
+}
+
+/* 延迟颜色仍由 Clash 自己计算；这里只加可读性底框。 */
+html[data-css-injection-root="true"] .layout-content__right .the-delay {
+  background: rgba(16, 10, 9, 0.25) !important;
+  border: 1px solid currentColor !important;
+  border-radius: 5px !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.96),
+    0 0 4px rgba(0, 0, 0, 0.68) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .the-check {
+  color: var(--tavern-honey) !important;
+  background: rgba(16, 10, 9, 0.28) !important;
+  border: 1px solid rgba(242, 189, 107, 0.52) !important;
+  border-radius: 5px !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(.the-pin, .the-unpin, .the-icon) {
+  filter: drop-shadow(0 0 4px rgba(227, 154, 69, 0.66));
+}

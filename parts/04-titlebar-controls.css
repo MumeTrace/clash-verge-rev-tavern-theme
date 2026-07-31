@@ -1,0 +1,60 @@
+/* 页面顶部标题区：轻玻璃，不对背景图本身做模糊处理。 */
+html[data-css-injection-root="true"] .base-page > header[data-tauri-drag-region="true"] {
+  background: linear-gradient(90deg, rgba(30, 18, 15, 0.3), rgba(72, 39, 28, 0.18)) !important;
+  border-bottom: 1px solid rgba(242, 189, 107, 0.42) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(110%);
+  backdrop-filter: blur(4px) saturate(110%);
+  box-shadow: 0 4px 12px rgba(9, 5, 4, 0.18);
+}
+
+html[data-css-injection-root="true"] .base-page > header[data-tauri-drag-region="true"] > .MuiTypography-root {
+  color: var(--tavern-text) !important;
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] :where(.the-bar, .the_titlebar) {
+  background: rgba(28, 17, 14, 0.18) !important;
+  border-color: rgba(242, 189, 107, 0.34) !important;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+html[data-css-injection-root="true"] :where(
+  .layout-content__right,
+  .the-bar,
+  .the_titlebar
+) .MuiIconButton-root {
+  color: var(--tavern-text) !important;
+  background: rgba(31, 18, 15, 0.2) !important;
+  border: 1px solid rgba(242, 189, 107, 0.28) !important;
+  transition:
+    transform 180ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease !important;
+}
+
+html[data-css-injection-root="true"] :where(
+  .layout-content__right,
+  .the-bar,
+  .the_titlebar
+) .MuiIconButton-root:hover {
+  transform: translateY(-1px);
+  color: var(--tavern-gold) !important;
+  background: rgba(111, 47, 40, 0.34) !important;
+  border-color: rgba(255, 211, 138, 0.7) !important;
+  box-shadow: 0 0 9px rgba(227, 154, 69, 0.3);
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiButton-outlined {
+  color: var(--tavern-text) !important;
+  border-color: rgba(242, 189, 107, 0.6) !important;
+  background: rgba(31, 18, 15, 0.18) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiButton-contained {
+  color: #fff8eb !important;
+  background: linear-gradient(135deg, var(--tavern-wine), var(--tavern-wine-bright)) !important;
+  border: 1px solid rgba(255, 211, 138, 0.58) !important;
+  box-shadow: 0 3px 10px rgba(9, 5, 4, 0.26);
+}

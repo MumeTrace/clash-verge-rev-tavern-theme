@@ -1,0 +1,128 @@
+/* 右侧主背景：不加蒙版、不调亮度、不模糊原图。 */
+html[data-css-injection-root="true"],
+html[data-css-injection-root="true"] body,
+html[data-css-injection-root="true"] #root {
+  background: var(--tavern-ink) !important;
+}
+
+html[data-css-injection-root="true"] .layout.MuiPaper-root {
+  background: transparent !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right {
+  isolation: isolate;
+  background-color: var(--tavern-deep) !important;
+  background-image: var(--tavern-main-image) !important;
+  background-size: cover !important;
+  background-position: 50% 50% !important;
+  background-repeat: no-repeat !important;
+  /* 按右侧容器自身定位；fixed 会改成按整个窗口定位，缩放时人物会横向跨位。 */
+  background-attachment: scroll !important;
+  background-origin: border-box !important;
+}
+
+/* 右侧交界处的暖色过渡：只叠颜色，不模糊两张原图。 */
+html[data-css-injection-root="true"] .layout-content__right::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 0;
+  width: 64px;
+  background: linear-gradient(
+    90deg,
+    rgba(67, 39, 31, 0.84) 0%,
+    rgba(67, 39, 31, 0.34) 48%,
+    rgba(67, 39, 31, 0) 100%
+  );
+  pointer-events: none;
+}
+
+html[data-css-injection-root="true"] .layout-content__right > .the-bar {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-css-injection-root="true"] .layout-content__right > .the-content {
+  z-index: 1;
+}
+
+/* 只清理右侧页面级“白墙”，不暴力清空所有 .MuiBox-root。 */
+html[data-css-injection-root="true"] .layout-content__right .the-content,
+html[data-css-injection-root="true"] .layout-content__right .base-page,
+html[data-css-injection-root="true"] .layout-content__right .base-container,
+html[data-css-injection-root="true"] .layout-content__right .base-container > section,
+html[data-css-injection-root="true"] .layout-content__right .base-content {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right {
+  color: var(--tavern-text) !important;
+}
+
+/*
+ * 当前应用即使使用浅色 MUI 配色，右侧背景仍然是深色图片。
+ * 因此普通文字必须明确改成暖白，不能只依赖继承或文字阴影。
+ */
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiTypography-root,
+  .MuiListItemText-primary,
+  .MuiFormLabel-root,
+  .MuiInputLabel-root,
+  .MuiInputBase-input,
+  .MuiSelect-select,
+  .MuiTableCell-root
+) {
+  color: var(--tavern-text) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiListItemText-secondary,
+  .MuiTypography-colorTextSecondary,
+  .MuiFormHelperText-root
+) {
+  color: var(--tavern-text-muted) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiInputBase-input.Mui-disabled,
+html[data-css-injection-root="true"] .layout-content__right .MuiSelect-select.Mui-disabled {
+  color: var(--tavern-text-muted) !important;
+  -webkit-text-fill-color: var(--tavern-text-muted) !important;
+  opacity: 0.82 !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right :where(
+  .MuiTypography-root,
+  .MuiListItemText-primary,
+  .MuiListItemText-secondary,
+  .MuiButton-root,
+  .MuiInputBase-input,
+  .MuiFormLabel-root,
+  .MuiTableCell-root
+) {
+  text-shadow: var(--tavern-text-shadow) !important;
+}
+
+html[data-css-injection-root="true"] .layout-content__right .MuiListItemText-primary {
+  color: var(--tavern-text) !important;
+}
+
+html[data-css-injection-root="true"] * {
+  scrollbar-color: rgba(227, 154, 69, 0.7) rgba(22, 15, 13, 0.2);
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar-thumb {
+  background: rgba(227, 154, 69, 0.68);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+html[data-css-injection-root="true"] *::-webkit-scrollbar-track {
+  background: rgba(22, 15, 13, 0.16);
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN" data-css-injection-root="true">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../clash-verge-tavern-theme.css">
+  </head>
+  <body>
+    <div class="layout">
+      <div class="layout-content__left">
+        <div class="the-traffic" id="traffic-panel">
+          <div id="traffic-content">
+            <div>
+              <div title="upload"><span class="MuiTypography-root">5.73</span><span class="MuiTypography-root" id="traffic-unit">KB/s</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layout-content__right">
+        <span class="MuiTypography-root" id="right-text">测试文字</span>
+        <div data-index="0">
+          <div class="MuiBox-root">
+            <button class="MuiListItemButton-root Mui-selected" id="selected-node">
+              <div class="MuiBox-root"><span class="MuiTypography-root" id="node-name">AWS日本01</span><span class="the-delay">97</span></div>
+            </button>
+            <button class="MuiListItemButton-root" id="plain-node">
+              <div class="MuiBox-root"><span class="MuiTypography-root" id="plain-node-name">AWS日本02</span></div>
+            </button>
+          </div>
+        </div>
+        <div class="base-content">
+          <div class="MuiGrid-root">
+            <div class="MuiGrid-root">
+              <div class="MuiBox-root">
+                <span class="MuiChip-label" id="node-chip">XUDP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="base-container no-padding">
+          <div class="MuiBox-root" aria-selected="true" id="selected-profile">
+            <h2 class="MuiTypography-root">订阅</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <output id="result">WAIT</output>
+    <script>
+      window.addEventListener('load', () => {
+        const result = document.querySelector('#result');
+
+        try {
+          const sheet = Array.from(document.styleSheets).find((item) =>
+            item.href && item.href.endsWith('clash-verge-tavern-theme.css')
+          );
+          const cssText = Array.from(sheet.cssRules, (rule) => rule.cssText).join('\n');
+          const requiredFragments = [
+            '.layout-content__right',
+            '.layout-content__left',
+            '.the-traffic::before',
+            '[data-index]',
+            '.MuiDialog-paper'
+          ];
+          const missing = requiredFragments.filter((fragment) => !cssText.includes(fragment));
+          const computedChecks = {
+            rightTextColor: getComputedStyle(document.querySelector('#right-text')).color === 'rgb(255, 242, 220)',
+            trafficVisible: getComputedStyle(document.querySelector('#traffic-content')).display === 'block',
+            trafficUnitReadable: getComputedStyle(document.querySelector('#traffic-unit')).color === 'rgb(244, 223, 189)',
+            trafficHeightResponsive: getComputedStyle(document.documentElement).getPropertyValue('--tavern-traffic-height').trim() === 'clamp(178px, 25vh, 220px)',
+            selectedNodeNameReadable: getComputedStyle(document.querySelector('#node-name')).color === 'rgb(255, 244, 223)',
+            plainNodeNameReadable: getComputedStyle(document.querySelector('#plain-node-name')).color === 'rgb(255, 247, 232)',
+            nodeChipReadable: getComputedStyle(document.querySelector('#node-chip')).color === 'rgb(255, 247, 232)',
+            nodeSelectedBorder: getComputedStyle(document.querySelector('#selected-node')).borderTopWidth === '2px',
+            profileSelectedBorder: getComputedStyle(document.querySelector('#selected-profile')).borderTopWidth === '2px'
+          };
+          const failedComputedChecks = Object.entries(computedChecks)
+            .filter(([, passed]) => !passed)
+            .map(([name]) => name);
+
+          result.textContent = JSON.stringify({
+            status: missing.length === 0 && failedComputedChecks.length === 0 ? 'PASS' : 'FAIL',
+            topLevelRuleCount: sheet.cssRules.length,
+            missing,
+            failedComputedChecks
+          });
+        } catch (error) {
+          result.textContent = JSON.stringify({ status: 'FAIL', error: String(error) });
+        }
+      });
+    </script>
+  </body>
+</html>

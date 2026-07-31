@@ -1,0 +1,26 @@
+node_modules/
+playwright-report/
+test-results/
+
+# Private theme configuration and generated output
+theme.private.json
+*.private.css
+
+# Private image assets are intentionally excluded from the open-source repository
+assets/
+source/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.avif
+*.heic
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.log
