@@ -15,6 +15,6 @@
     "test": "npm run build && npm run check:static && npm run test:browser"
   },
   "devDependencies": {
-    "playwright": "1.62.1"
+    "playwright": "1.64.1"
   }
 }
